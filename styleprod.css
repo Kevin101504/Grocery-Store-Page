@@ -17,14 +17,20 @@ body {
     width: 80%;
     margin: auto;
     overflow: hidden;
+    height: fit-content;
 }
 
 header {
     background: #333;
     color: #fff;
-    padding-top: 30px;
+    padding-top: 10px;
     min-height: 70px;
     border-bottom: #e8491d 3px solid;
+    position: fixed;
+    width:100%;
+    z-index: 1;
+    top:0;
+    text-align: center;
 }
 
 header a {
@@ -52,24 +58,111 @@ header nav {
 }
 
 #products {
+    margin-top: 80px;
     padding: 50px 0;
+    height: fit-content;
+    top:150px;
+}
+
+#fruits {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#dairy{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#Meat{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#Pantry{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#Beverages{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#Snacks{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#Health{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#Bakery{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#Frozen{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .product {
-    width: calc(33.33% - 20px);
-    float: left;
-    margin: 20px 10px;
+    width: calc(60% - 20px);
+    margin: 0 0 30px;
     background: #fff;
     padding: 15px;
     text-align: center;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+#container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    height: fit-content;
+}
+
+.product:hover {
+    transform: translateY(-5px);
 }
 
 .product img {
     width: 100%;
     height: auto;
     border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 .product h3 {
@@ -95,3 +188,145 @@ header nav {
 .product .btn:hover {
     background-color: #d43f1d;
 }
+
+footer {
+ 
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    .product {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .product {
+        width: 100%;
+    }
+}
+
+/* Style for the cart section */
+#cart {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-bottom: 70px;
+}
+
+/* Style for the cart container */
+.cart-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Style for the heading */
+.cart-container h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Style for the cart items list */
+#cart-items {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Style for each cart item */
+#cart-items li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Style for the checkout button */
+#checkoutbutton {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* Hover effect for the checkout button */
+#checkoutbutton:hover {
+    background-color: #45a049;
+}
+
+button{
+    cursor:pointer;
+    font-size: 16px;
+    padding : 2px;
+}
+
+.cartmenubtn {
+    position:fixed ;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+    cursor: pointer;
+    top:100px;
+}
+
+.cartmenubtn a{
+    color: black;
+    text-decoration: none;
+}
+
+.topicsbuttn {
+    position: fixed;
+    display: block;
+    right: 0;
+    top: 100px; /* Adjust as needed */
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1; /* Ensure it's above other content */
+    width:11%;
+}
+
+.topbtn p{
+    color:black;
+}
+
+.topics {
+    display: none;
+    position: fixed;
+    right: 0;
+    top: 150px; /* Adjust to position below .topicsbuttn */
+    width: 11%; /* Adjust width as needed */
+    border: 1px solid #ccc;
+    z-index: 1; /* Ensure it's above other content */
+}
+.topics ul{
+    list-style: none;
+}
+.topics li a{
+    color: black;
+    text-decoration: none;
+    font-weight: lighter;
+}
+
+.topicsbuttn:hover  .topics {
+    display: block;
+}
+
+
+
+

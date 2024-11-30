@@ -1,50 +1,203 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const addToCartButtons = document.querySelectorAll('.add-to-cart');
-    const cartItemsList = document.getElementById('cart-items');
-    const cartTotal = document.getElementById('cart-total');
-    const checkoutButton = document.getElementById('checkout');
+// Function to increase quantity
+function increaseQuantity(productId) {
+    const quantityInput = document.getElementById(`quantity-${productId}`);
+    let quantity = parseInt(quantityInput.value);
+    quantity++;
+    quantityInput.value = quantity;
+}
 
-    let cart = [];
-
-    // Add to cart button click event
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const name = button.getAttribute('data-name');
-            const price = parseFloat(button.getAttribute('data-price'));
-
-            addToCart(name, price);
-            updateCartDisplay();
-        });
-    });
-
-    // Add item to cart
-    function addToCart(name, price) {
-        cart.push({ name, price });
+// Function to decrease quantity
+function decreaseQuantity(productId) {
+    const quantityInput = document.getElementById(`quantity-${productId}`);
+    let quantity = parseInt(quantityInput.value);
+    if (quantity > 0) {
+        quantity--;
+        quantityInput.value = quantity;
     }
+}
 
-    // Update cart display
-    function updateCartDisplay() {
-        cartItemsList.innerHTML = '';
-        let total = 0;
+// Function to add to cart (example, replace with actual cart functionality)
+// Initialize cart as an array to hold cart items
 
-        cart.forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
-            cartItemsList.appendChild(li);
-            total += item.price;
-        });
+let items = []; // Assuming this is a global variable to store cart items
+let sum = 0; // Assuming this is a global variable to store the total cost
 
-        cartTotal.textContent = `$${total.toFixed(2)}`;
-    }
+function addToCart(productId, productName, productPrice) {
+    const quantityInput = document.getElementById(`quantity-${productId}`);
+    const quantity = parseInt(quantityInput.value);
+    const price = parseInt(productPrice);
 
-    // Checkout button click event
-    checkoutButton.addEventListener('click', function() {
-        if (cart.length > 0) {
-            alert('Thank you for your purchase!');
-            cart = [];
-            updateCartDisplay();
-        } else {
-            alert('Your cart is empty. Add some items before checking out.');
+    if (quantity > 0) {
+        let found = false;
+
+        for (let i = 0; i < items.length; i++) {
+            let item = items[i];
+
+            if (productId === item.id) {
+                // Update quantity and cost properties of item if productId exists
+                item.quant += quantity;
+                item.cost += price;
+
+                found = true;
+                break; // Exit the loop if the item is found and updated
+            }
         }
-    });
-});
+
+        // If productId doesn't exist in items, add it
+        if (!found) {
+            items.push({ id: productId, name: productName, cost: price, quant: quantity });
+        }
+
+        // Recalculate total sum
+        sum = 0;
+        for (let i = 0; i < items.length; i++) {
+            sum += items[i].cost * items[i].quant;
+        }
+
+        // Update total displayed
+        document.getElementById('total').innerHTML = `Total: $${sum}`;
+
+        // Clear existing list items in 'cart-items' element
+        document.getElementById('cart-items').innerHTML = '';
+
+        // Create and append new list items for each item in items array
+        displayprod();
+        document.getElementById(`quantity-${productId}`).value=0;
+    } else {
+        alert('Please select a quantity greater than zero.');
+    }
+}
+
+function reduceQuantity(productId) {
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].id === productId) {
+            // Reduce quantity by 1 if greater than 1
+            if (items[i].quant > 1) {
+                items[i].quant--;
+            }
+
+            else if(items[i].quant == 1){
+                removeFromCart(productId);
+            }
+
+            // Recalculate total sum
+            sum = 0;
+            for (let j = 0; j < items.length; j++) {
+                sum += items[j].cost * items[j].quant;
+            }
+
+            // Update total displayed
+            document.getElementById('total').innerHTML = `Total: $${sum}`;
+
+            // Update quantity input value
+            document.getElementById(`quant-${productId}`).value = items[i].quant;
+
+            let c=items[i].quant * items[i].cost;
+
+            document.getElementById(`cost-${productId}`).innerHTML=`${c}`;
+
+            break; // Exit loop once quantity is reduced
+        }
+    }
+}
+
+function addQuantity(productId){
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].id === productId) {
+            // Reduce quantity by 1 if greater than 1
+            items[i].quant++;
+
+            // Recalculate total sum
+            sum = 0;
+            for (let j = 0; j < items.length; j++) {
+                sum += items[j].cost * items[j].quant;
+            }
+
+            // Update total displayed
+            document.getElementById('total').innerHTML = `Total: $${sum}`;
+
+            // Update quantity input value
+            document.getElementById(`quant-${productId}`).value = items[i].quant;
+
+            let c=items[i].quant * items[i].cost;
+
+            document.getElementById(`cost-${productId}`).innerHTML=`${c}`;
+
+            break; // Exit loop once quantity is reduced
+        }
+    }
+}
+
+function removeFromCart(productId) {
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].id === productId) {
+            // Remove the item from the items array
+            items.splice(i, 1);
+
+            // Recalculate total sum
+            sum = 0;
+            for (let j = 0; j < items.length; j++) {
+                sum += items[j].cost * items[j].quant;
+            }
+
+            // Update total displayed
+            document.getElementById('total').innerHTML = `Total: $${sum}`;
+
+            // Remove item from the HTML display
+            document.getElementById(`item-${productId}`).remove();
+
+            break; // Exit loop once item is removed
+        }
+    }
+}
+
+function updateQuantity(productId, newQuantity) {
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].id === productId) {
+            // Update the quantity
+            items[i].quant = parseInt(newQuantity);
+
+            // Recalculate total sum
+            sum = 0;
+            for (let j = 0; j < items.length; j++) {
+                sum += items[j].cost * items[j].quant;
+            }
+
+            // Update total displayed
+            document.getElementById('total').innerHTML = `Total: $${sum}`;
+
+            break; // Exit loop once quantity is updated
+        }
+    }
+}
+
+
+function checkout(){
+    alert('Thank you for purchasing at our store.');
+    // Refresh the page
+    location.reload();
+
+    // Scroll to the top of the page
+    window.scrollTo(0, 0);
+    
+}
+
+function displayprod(){
+    for (let i = 0; i < items.length; i++) {
+        let item = items[i];
+
+        var div = document.createElement('div');
+        div.id = `item-${item.id}`;
+        div.innerHTML = `
+            Name : ${item.name} <br>
+            Quantity : 
+            <button onclick="reduceQuantity(${item.id})">-</button>
+            <input type="number" id="quant-${item.id}" value="${item.quant}" readonly> 
+            <button onclick="addQuantity(${item.id})">+</button>
+            <br>
+            Cost : $<span id="cost-${item.id}">${item.cost * item.quant}</span>
+            <hr>
+        `;
+        document.getElementById('cart-items').appendChild(div);
+    }
+}

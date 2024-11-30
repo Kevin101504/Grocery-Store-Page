@@ -22,9 +22,14 @@ body {
 header {
     background: #333;
     color: #fff;
-    padding-top: 30px;
+    padding-top: 10px;
     min-height: 70px;
     border-bottom: #e8491d 3px solid;
+    position: fixed;
+    width:100%;
+    z-index: 1;
+    top:0;
+    text-align: center;
 }
 
 header a {
@@ -51,8 +56,9 @@ header nav {
     margin-top: 10px;
 }
 
-#contact {
-    padding: 50px 0;
+#contact{
+    margin-top: 150px;
+    margin-bottom: 70px;
 }
 
 #contact-form {
@@ -90,7 +96,7 @@ header nav {
     width: 100%;
     padding: 10px;
     border: none;
-    background-color: #e8491d;
+    background-color:  #333;
     color: #fff;
     font-size: 16px;
     cursor: pointer;
@@ -114,4 +120,20 @@ header nav {
 .contact-info p {
     font-size: 18px;
     margin-bottom: 5px;
+}
+
+footer {
+ 
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
 }

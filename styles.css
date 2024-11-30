@@ -13,6 +13,12 @@ body {
     color: #333;
 }
 
+#hero{
+    margin-top: 80px;
+    padding: 50px 0;
+    height: fit-content;
+}
+
 .container {
     width: 80%;
     margin: auto;
@@ -22,9 +28,14 @@ body {
 header {
     background: #333;
     color: #fff;
-    padding-top: 30px;
+    padding-top: 10px;
     min-height: 70px;
     border-bottom: #e8491d 3px solid;
+    position: fixed;
+    width:100%;
+    z-index: 1;
+    top:0;
+    text-align: center;
 }
 
 header a {
@@ -60,4 +71,77 @@ header #cta {
     float: right;
 }
 
- footer
+#container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    height: fit-content;
+}
+
+footer {
+ 
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+#reviews {
+    margin-top: 50px;
+    padding:10px;
+    margin-bottom:70px;
+}
+
+#review-list {
+    margin-bottom: 20px;
+}
+
+.review {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#reviews .container{
+    border:1px solid black;
+    padding:10px;
+}
+
+.review p {
+    margin: 0;
+}
+
+#review-form {
+    max-width: 400px;
+    margin-top: 20px;
+}
+
+#review-form label {
+    font-weight: bold;
+}
+
+#review-form textarea {
+    width: 100%;
+    resize: vertical;
+}
+
+.pics {
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center items horizontally */
+    padding: 10px; /* Padding around the container */
+}
+
+.pics img {
+    padding: 10px; /* Padding around each image */
+    max-width: 100%; /* Ensure images don't exceed container width */
+}
+
+
